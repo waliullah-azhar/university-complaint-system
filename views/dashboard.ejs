@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>University Complaint System - Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #F3F4F6;
+    }
+
+    .header {
+      background-color: #1E3A8A;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .table thead {
+      background-color: #1E3A8A;
+      color: white;
+    }
+
+    .badge-pending {
+      background-color: #F59E0B;
+    }
+
+    .badge-progress {
+      background-color: #3B82F6;
+    }
+
+    .badge-resolved {
+      background-color: #16A34A;
+    }
+
+    .badge-high {
+      background-color: #DC2626;
+    }
+
+    .badge-medium {
+      background-color: #F59E0B;
+    }
+
+    .badge-low {
+      background-color: #16A34A;
+    }
+
+    .btn-primary {
+      background-color: #3B82F6;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #1E40AF;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+  University Complaint System
+</div>
+
+<div class="container mt-4">
+
+  <!-- Welcome and Logout -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4>Welcome, <strong><%= user.name %></strong></h4>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+  </div>
+
+  <!-- Submit Complaint Button -->
+  <div class="mb-4">
+    <a href="/complaint/new" class="btn btn-primary">
+      Submit New Complaint
+    </a>
+  </div>
+
+  <!-- Complaints Table -->
+  <h5 class="mb-3">Your Complaints</h5>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Admin Response</th>
+          <th>Updated</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <% if (complaints.length === 0) { %>
+          <tr>
+            <td colspan="7" class="text-center">
+              No complaints submitted yet.
+            </td>
+          </tr>
+        <% } %>
+
+        <% complaints.forEach(c => { %>
+          <tr>
+
+            <td><%= c.title %></td>
+            <td><%= c.description %></td>
+
+            <!-- Priority Badge -->
+            <td>
+              <% if(c.priority === 'High') { %>
+                <span class="badge badge-high">High</span>
+              <% } else if(c.priority === 'Medium') { %>
+                <span class="badge badge-medium">Medium</span>
+              <% } else { %>
+                <span class="badge badge-low">Low</span>
+              <% } %>
+            </td>
+
+            <!-- Status Badge -->
+            <td>
+              <% if(c.status === 'Resolved') { %>
+                <span class="badge badge-resolved">Resolved</span>
+              <% } else if(c.status === 'In Progress') { %>
+                <span class="badge badge-progress">In Progress</span>
+              <% } else { %>
+                <span class="badge badge-pending">
+                  <%= c.status || 'Pending' %>
+                </span>
+              <% } %>
+            </td>
+
+            <td><%= c.admin_response || 'No response yet' %></td>
+            <td><%= new Date(c.updated_at).toLocaleString() %></td>
+
+            <td>
+              <a href="/complaint/edit/<%= c.id %>"
+                 class="btn btn-sm btn-warning">
+                 Edit
+              </a>
+            </td>
+
+          </tr>
+        <% }) %>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

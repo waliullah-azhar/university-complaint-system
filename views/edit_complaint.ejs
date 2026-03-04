@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>University Complaint System - Edit Complaint</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #F3F4F6;
+        }
+
+        .header {
+            background-color: #1E3A8A;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .edit-card {
+            margin-top: 50px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+
+        .btn-primary {
+            background-color: #3B82F6;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #1E40AF;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    University Complaint System
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="edit-card">
+                <h4 class="mb-4 text-center">Edit Complaint</h4>
+
+                <form action="/complaint/edit/<%= complaint.id %>" method="POST" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text"
+                               class="form-control"
+                               id="title"
+                               name="title"
+                               value="<%= complaint.title %>"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control"
+                                  id="description"
+                                  name="description"
+                                  rows="4"
+                                  required><%= complaint.description %></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text"
+                               class="form-control"
+                               id="category"
+                               name="category"
+                               value="<%= complaint.category %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="priority" class="form-label">Priority</label>
+                        <select class="form-select"
+                                id="priority"
+                                name="priority"
+                                required>
+
+                            <option value="Low" <%= complaint.priority === 'Low' ? 'selected' : '' %>>Low</option>
+                            <option value="Medium" <%= complaint.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
+                            <option value="High" <%= complaint.priority === 'High' ? 'selected' : '' %>>High</option>
+
+                        </select>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">
+                            Update Complaint
+                        </button>
+
+                        <a href="/complaint/my" class="btn btn-secondary">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
