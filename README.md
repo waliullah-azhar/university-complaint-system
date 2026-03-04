@@ -58,3 +58,34 @@ File storage: S3
 
 permission : IAM roles
 
+
+
+## How to Run Locally
+
+1. Clone the repository:
+
+``bash 
+git clone https://github.com/your-username/university-complaint-system.git
+cd university-complaint-system
+``
+2. Install dependencies:
+
+npm install
+
+3. Configure your MySQL database and update db.js with credentials.
+
+4. Start the server:
+
+``bash 
+node server.js
+``
+
+4. Open your browser and go to:
+
+http://localhost:3000
+
+5.Open your browser and go to:
+
+http://localhost:3000
+
+-> Use the admin credentials to test admin features.
